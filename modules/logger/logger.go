@@ -123,7 +123,7 @@ func Logf(t testing.TestingT, format string, args ...interface{}) {
 	if tt, ok := t.(helper); ok {
 		tt.Helper()
 	}
-	Default.Logf(t, format, args)
+	Default.Logf(t, format, args...)
 }
 
 // Log logs the given arguments to stdout, along with a timestamp and information about what test and file is doing the

@@ -8,7 +8,7 @@ import (
 	// See: https://github.com/kubernetes/client-go/issues/242
 	_ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
 
-	"github.com/gruntwork-io/terratest/modules/logger"
+	"github.com/AlinsRan/terratest/modules/logger"
 	"github.com/gruntwork-io/terratest/modules/testing"
 )
 
@@ -33,13 +33,13 @@ func GetKubernetesClientFromOptionsE(t testing.TestingT, options *KubectlOptions
 		if err != nil {
 			return nil, err
 		}
-		logger.Default.Logf(t, "Configuring Kubernetes client to use the in-cluster serviceaccount token")
+		logger.Log(t, "Configuring Kubernetes client to use the in-cluster serviceaccount token")
 	} else {
 		kubeConfigPath, err := options.GetConfigPath(t)
 		if err != nil {
 			return nil, err
 		}
-		logger.Default.Logf(t, "Configuring Kubernetes client using config file %s with context %s", kubeConfigPath, options.ContextName)
+		logger.Logf(t, "Configuring Kubernetes client using config file %s with context %s", kubeConfigPath, options.ContextName)
 		// Load API config (instead of more low level ClientConfig)
 		config, err = LoadApiClientConfigE(kubeConfigPath, options.ContextName)
 		if err != nil {

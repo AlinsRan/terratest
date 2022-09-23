@@ -1,6 +1,10 @@
-module github.com/gruntwork-io/terratest
+module github.com/AlinsRan/terratest
 
 go 1.17
+
+require github.com/gruntwork-io/terratest v0.40.22
+
+replace github.com/AlinsRan/terratest => github.com/gruntwork-io/terratest v0.40.22
 
 require (
 	cloud.google.com/go v0.83.0
@@ -13,7 +17,6 @@ require (
 	github.com/aws/aws-lambda-go v1.13.3
 	github.com/aws/aws-sdk-go v1.40.56
 	github.com/docker/spdystream v0.0.0-20181023171402-6480d4af844c // indirect
-	github.com/elazarl/goproxy v0.0.0-20190911111923-ecfe977594f1 // indirect
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-errors/errors v1.0.2-0.20180813162953-d98b870cc4e0 // indirect
 	github.com/go-sql-driver/mysql v1.4.1

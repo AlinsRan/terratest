@@ -33,17 +33,17 @@ func GetKubernetesClientFromOptionsE(t testing.TestingT, options *KubectlOptions
 		if err != nil {
 			return nil, err
 		}
-		logger.Log(t, "Configuring Kubernetes client to use the in-cluster serviceaccount token")
+		logger.Default.Logf(t, "Configuring Kubernetes client to use the in-cluster serviceaccount token")
 	} else {
 		kubeConfigPath, err := options.GetConfigPath(t)
 		if err != nil {
 			return nil, err
 		}
-		logger.Logf(t, "Configuring Kubernetes client using config file %s with context %s", kubeConfigPath, options.ContextName)
+		logger.Default.Logf(t, "Configuring Kubernetes client using config file %s with context %s", kubeConfigPath, options.ContextName)
 		// Load API config (instead of more low level ClientConfig)
 		config, err = LoadApiClientConfigE(kubeConfigPath, options.ContextName)
 		if err != nil {
-			logger.Logf(t, "Error loading api client config, falling back to in-cluster authentication via serviceaccount token: %s", err)
+			logger.Default.Logf(t, "Error loading api client config, falling back to in-cluster authentication via serviceaccount token: %s", err)
 			config, err = rest.InClusterConfig()
 			if err != nil {
 				return nil, err

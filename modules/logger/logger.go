@@ -123,8 +123,7 @@ func Logf(t testing.TestingT, format string, args ...interface{}) {
 	if tt, ok := t.(helper); ok {
 		tt.Helper()
 	}
-
-	DoLog(t, 2, os.Stdout, fmt.Sprintf(format, args...))
+	Default.Logf(t, format, args)
 }
 
 // Log logs the given arguments to stdout, along with a timestamp and information about what test and file is doing the
@@ -134,8 +133,12 @@ func Log(t testing.TestingT, args ...interface{}) {
 	if tt, ok := t.(helper); ok {
 		tt.Helper()
 	}
-
-	DoLog(t, 2, os.Stdout, args...)
+	for _, arg := range args {
+		str, ok := arg.(string)
+		if ok {
+			Default.Logf(t, "%s", str)
+		}
+	}
 }
 
 // DoLog logs the given arguments to the given writer, along with a timestamp and information about what test and file is
